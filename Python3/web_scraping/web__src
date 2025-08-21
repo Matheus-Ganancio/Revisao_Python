@@ -1,0 +1,19 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://pt.wikipedia.org/wiki/Python"
+resposta = requests.get(url)
+
+# Mostra que o conteúdo HTML chegou
+print(resposta.text[:500])
+
+soup = BeautifulSoup(resposta.text, "html.parser")
+print(soup.title)
+print(soup.title.text)
+
+# -- valor da variavel é o de todos paragrafos<p> encontrados
+paragrafos = soup.find_all("p")
+
+for i, p in enumerate(paragrafos[+3]):
+    print(f"\nParágrafo {i+1}: ")
+    print(p.text)
